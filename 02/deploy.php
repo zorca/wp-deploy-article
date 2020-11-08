@@ -20,8 +20,8 @@ set('shared_dirs', []);
 set('writable_dirs', []);
 
 // Local and remote domain names
-set('domain_local', 'example.test');
-set('domain_remote', 'example.com');
+set('domain_local', 'w91136je.test');
+set('domain_remote', 'w91136je.beget.tech');
 
 // Hosts
 
