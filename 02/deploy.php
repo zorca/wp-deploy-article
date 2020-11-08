@@ -40,7 +40,7 @@ task('test', function () {
 /**
  * Push code from local folder to remote server
  */
-task('push:files', function () {
+task('push:code', function () {
     $project_path = runLocally('pwd');
     upload($project_path . '/', '{{deploy_path}}/public_html');
 });
