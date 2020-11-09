@@ -58,7 +58,7 @@ task('push:db', function () {
 /**
  * Pull database task
  */
-task('push:db', function () {
+task('pull:db', function () {
     run('cd {{deploy_path}}/public_html && wp db export --add-drop-table current.sql');
     download('{{deploy_path}}/public_html/current.sql', 'current.sql');
     runLocally('wp db import current.sql');
