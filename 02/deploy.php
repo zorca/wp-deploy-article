@@ -55,6 +55,16 @@ task('push:db', function () {
     run('cd {{deploy_path}}/public_html && wp search-replace "//'.get('domain_local').'" "//'.get('domain_remote').'"');
 });
 
+/**
+ * Pull database task
+ */
+task('push:db', function () {
+    run('cd {{deploy_path}}/public_html && wp db export --add-drop-table current.sql');
+    download('{{deploy_path}}/public_html/current.sql', 'current.sql');
+    runLocally('wp db import current.sql');
+    run('wp search-replace "//'.get('domain_remote').'" "//'.get('domain_local').'"');
+});
+
 desc('Push code and files from local to remote server');
 task('push', [
     'push:code',
