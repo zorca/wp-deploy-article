@@ -20,7 +20,7 @@ set('shared_dirs', []);
 set('writable_dirs', []);
 
 // Local and remote domain names
-set('domain_local', 'w91136je.test');
+set('domain_local', 'wordpress.test');
 set('domain_remote', 'w91136je.beget.tech');
 
 // Hosts
@@ -33,8 +33,8 @@ host('w91136je@w91136je.beget.tech')->set('deploy_path', '~/{{application}}');
  * Test task
  */
 task('test', function () {
-    $result = run('php -v');
-    writeln("Current PHP version: $result");
+    $php_version = run('php -v');
+    writeln("Current PHP version: $php_version");
 });
 
 /**
@@ -50,9 +50,9 @@ task('push:code', function () {
  */
 task('push:db', function () {
     runLocally('wp db export --add-drop-table current.sql');
-    upload('current.sql', '{{deploy_path}}/current.sql');
-    run('cd {{deploy_path}} && wp db import current.sql');
-    run('cd {{deploy_path}} && wp search-replace "//'.get('domain_local').'" "//'.get('domain_remote').'"');
+    upload('current.sql', '{{deploy_path}}/public_html/current.sql');
+    run('cd {{deploy_path}}/public_html && wp db import current.sql');
+    run('cd {{deploy_path}}/public_html && wp search-replace "//'.get('domain_local').'" "//'.get('domain_remote').'"');
 });
 
 desc('Push code and files from local to remote server');
